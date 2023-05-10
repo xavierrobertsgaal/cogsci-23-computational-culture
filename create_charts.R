@@ -11,7 +11,7 @@ setwd(dirname(getActiveDocumentContext()$path))
 source("theme_mprl_ggplot.R") # Lab ggplot theme
 
 theme_set(theme_mprl())
-CHART_TO_EPS <- TRUE # Set to FALSE to output .png chart graphics
+CHART_TO_EPS <- F # Set to FALSE to output .png chart graphics
 
 ##### Figure 1: Analysis of Model 1 #####
 
