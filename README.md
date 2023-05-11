@@ -25,8 +25,8 @@ pip install -r requirements.txt
 
 *Note: The simulation scripts take the following arguments:*
   - `--path`: The path to save simulation results (defaults to `sims/` or `sims_gn/` depending on the script)
-  - `-- size`: Initial population size (default `120`)
-  - `-- gens`: Number of generations to simulate (default `5000`)
+  - `--size`: Initial population size (default `120`)
+  - `--gens`: Number of generations to simulate (default `5000`)
   - `--lo`: Lower bound of parameter space (default `0.0`)
   - `--hi`: Upper bound of parameter space (default `1.0`)
   - `--ns`: Number of steps; how many values to interpolate between `lo` and `hi` (default `11`)
