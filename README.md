@@ -3,14 +3,14 @@
 Code and data to reproduce simulation results from the paper, "Computational principles underpinning the evolution of cultural learning mechanisms", accepted at CogSci 2023.
 
 ## Figures and data:
-- Figures (.eps and .png versions) can be found in `plots/`
-- Underlying data from the figures can be found in `data/`
-- Simulation results from the paper (generated using default settings) can be downloaded from [this link](https://drive.google.com/drive/folders/1aHKY3w87sThStZ6kIuN17yP0NG2Yyx7I?usp=share_link)
+- Figures (.eps and .png versions) can be found in `plots/`.
+- Underlying data from the figures can be found in `data/`.
+- Simulation results from the paper (generated using default settings) can be downloaded from [this link](https://drive.google.com/drive/folders/1aHKY3w87sThStZ6kIuN17yP0NG2Yyx7I?usp=share_link).
 
 ## Key files for reproducing simulation and analyses:
-- `create_charts.R` generates the figures used in the paper. It requires that analyzed simulation data is present in `data/`, and it outputs figures to `plots/`
-- `data_cleaning.ipynb` contains functionality to clean and analyze simulation results. It requires simulation results in `sims/` or `sims_gn/` and it saves prepared simulation data to `data/`
-- `run_simulation_gn.py` launches the Model 1 simulation. It can be used from the command line. Documentation is below
+- `create_charts.R` generates the figures used in the paper. It requires that analyzed simulation data is present in `data/`, and it outputs figures to `plots/`.
+- `data_cleaning.ipynb` contains functionality to clean and analyze simulation results. It requires simulation results in `sims/` or `sims_gn/` and it saves prepared simulation data to `data/`.
+- `run_simulation_gn.py` launches the Model 1 simulation. It can be used from the command line. Documentation is below.
 - `run_simulation.py` generates the Model 2 simulation from the command line, as below.
 - `theme_mprl_ggplot.R` contains a `ggplot` theme for recreating figures.
 
@@ -21,7 +21,7 @@ Code and data to reproduce simulation results from the paper, "Computational pri
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-3. Launch the simulation by typing `python run_simulation.py` or `python run_simulation_gn.py` (this takes a while!)
+3. Launch the simulation by typing `python run_simulation.py` or `python run_simulation_gn.py` (this takes a while!).
 
 *Note: The simulation scripts take the following arguments:*
   - `--path`: The path to save simulation results (defaults to `sims/` or `sims_gn/` depending on the script)
@@ -34,4 +34,4 @@ pip install -r requirements.txt
   - `--ncores`: Number of CPU cores to use **(defaults to a single core, which is *extremely* slow. Suggest using a multiple of `ns`)**
   - `--params_path`: Optional argument containing a **.csv file** with the parameters to run in columns named `Delta`, `Lambda`, and `Kappa`. If used, this overrides `lo`, `hi`, and `ns`. This will throw an error if the file is not a .csv formatted correctly.
 
-Please create an issue here or email the corresponding author (Xavier Roberts-Gaal) if you have any questions
+Please create an issue here or email the corresponding author (Xavier Roberts-Gaal) if you have any questions.
