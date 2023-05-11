@@ -1,17 +1,17 @@
-# R code to reproduce charts from "Computational principles underpinning the 
+# R code to reproduce charts from "Computational principles underlying the 
 # evolution of cultural learning mechanisms" by Xavier Roberts-Gaal and
 # Fiery Cushman, Department of Psychology, Harvard University, 10 May 2023
 
 ##### Housekeeping #####
 
 if (!require("pacman")) { install.packages("pacman"); require("pacman") }
-pacman::p_load(tidyverse, scales, svglite, rstudioapi)
+pacman::p_load(tidyverse, scales, rstudioapi, svglite)
 
 setwd(dirname(getActiveDocumentContext()$path))
 source("theme_mprl_ggplot.R") # Lab ggplot theme
 
 theme_set(theme_mprl())
-CHART_TO_EPS <- F # Set to FALSE to output .png chart graphics
+CHART_TO_EPS_OR_SVG <- TRUE # Set to FALSE to output .png chart graphics
 
 ##### Figure 1: Analysis of Model 1 #####
 
@@ -53,23 +53,27 @@ df_fig2 <- read_csv("data/model2_simulations_aggregated.csv") %>%
   filter(kappa == 0.4, 
          lambda %in% c(0.1, 0.2, 0.3))
 
+lambda_labeller <- function(variable, value) {
+  paste0("MB learning cost: ", value)
+}
+
 (fig2 <- ggplot(data = df_fig2, 
                 aes(x = delta, y = prop, color = strategy)) +
     scale_color_manual(values = c("IL" = "green", "MB" = "blue", "MF" = "orange")) +
-    scale_alpha(guide='none') +
+    guides(color = guide_legend(title = "Strategy")) +
     scale_x_continuous(n.breaks = 5, labels = label_number(accuracy = 0.01), 
                        name = "Shock probability") +
     scale_y_continuous(n.breaks = 5, labels = label_number(accuracy = 0.01), 
                        limits = c(0, 1), name = "Concentration of type") +
     geom_jitter(width = 0.01, height = 0.01, shape = 1) +
     geom_smooth(aes(x = delta, y = prop), formula = y ~ x, method = "lm", se=F) +
-    facet_wrap( ~ Lambda, nrow = 3, labeller = label_both))
+    facet_wrap( ~ Lambda, nrow = 3, labeller = lambda_labeller))
 
 ##### Figure 3: Comparison of Models 1 and 2 #####
 
 # Implements the equilibrium proportion of SL from Giuliano and Nunn (2021)
 prop_SL <- function(delta, kappa=0.4) {
-  if (delta >= kappa) { return(0) }
+  if (delta >= kappa) { return(0.05) }
   else { return((-delta + kappa) / (kappa * (1 - delta)))}
 }
 
@@ -78,7 +82,7 @@ deltas <- c(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
 model1 <- data.frame(
   Delta = deltas,
   SL = map_dbl(deltas, prop_SL),
-  Model = 1
+  Model = "1"
 )
 
 model2 <- df_fig2 %>%
@@ -87,7 +91,7 @@ model2 <- df_fig2 %>%
   pivot_wider(names_from = strategy,
               values_from = prop) %>%
   mutate(SL = MB + MF,
-         Model = 2,
+         Model = "2",
          Delta = delta) %>%
   select(Delta, SL, Model)
 
@@ -103,8 +107,8 @@ df_fig3$Model <- factor(df_fig3$Model, levels = c("1", "2"))
 
 ##### Save images from plots #####
 
-if (CHART_TO_EPS) {
-  print("Saving .eps files")
+if (CHART_TO_EPS_OR_SVG) {
+  print("Saving .eps and .svg files")
   ggsave(filename = "plots/fig_model1.eps", 
          plot = fig1,
          device = "eps",
@@ -112,9 +116,8 @@ if (CHART_TO_EPS) {
          height = 4)
   ggsave(filename = "plots/fig_model2.eps",
          plot = fig2,
-         device = "eps",
          width = 6.25,
-         height = 10.4)
+         height = 9)
   ggsave(filename = "plots/fig_modelcomparison.eps",
          plot = fig3,
          device = "eps",
