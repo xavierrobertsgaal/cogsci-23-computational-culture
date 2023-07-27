@@ -1,6 +1,6 @@
 # Computational principles underlying the evolution of cultural learning mechanisms
 
-Code and data to reproduce simulation results from the paper, "Computational principles underlying the evolution of cultural learning mechanisms", accepted at CogSci 2023.
+Code and data to reproduce simulation results from the paper, ["Computational principles underlying the evolution of cultural learning mechanisms"](https://scholar.harvard.edu/xrg/publications/computational-principles-underlying-evolution-cultural-learning-mechanisms), presented at CogSci 2023.
 
 ## Figures and data:
 - Figures (.eps and .png versions) can be found in `plots/`.
