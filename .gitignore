@@ -1,8 +1,13 @@
+# Large files that are present in google drive
+simulations/
+simulations_gn/
+
 # Mac files
 .DS_Store
 
 # Python stuff
 .ipynb_checkpoints
+.python-version
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

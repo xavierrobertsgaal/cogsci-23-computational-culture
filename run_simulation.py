@@ -266,7 +266,7 @@ def simulate(path: str, size: int, gens: int, Delta: float, Lambda: float, Kappa
     Also, saves a .csv file with the simulation results to the given path, including parameters in the filename.
     """
     # print(f"Running simulation with parameters size={size}, gens={gens}, Delta={Delta}, Lambda={Lambda}, Kappa={Kappa}, seed={seed}") 
-    rng = np.random.default_rng(seed=seed) # LOOK INTO WHETHER I CAN PREGENERATE
+    rng = np.random.default_rng(seed=seed)
     env = World(rng=rng, Delta=Delta, Lambda=Lambda, Kappa=Kappa)
     for i in range(size):
         env.add_agent(id = i)
